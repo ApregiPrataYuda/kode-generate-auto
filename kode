@@ -1,0 +1,28 @@
+ public function generatekode()
+    {
+            $this->db->select('kode_kategori');
+            $this->db->from('kategori');
+            $this->db->order_by('kode_kategori', 'desc');
+            $this->db->limit(1);
+            $data = $this->db->get();
+            $data2 = $data->result();
+            $q = "";
+            foreach($data2 as $tr)
+            {
+                $q = $tr->kode_kategori;
+            }
+            $kode=substr($q, -8);
+            $num=(int)$kode;
+            $no = 1;
+            if($num==0 || $num==null)
+            {
+                $temp = 1;
+            }
+            else
+            {
+                $temp=$num + $no;
+            }
+            $semua = "Kat".str_pad($temp, 8, 0, STR_PAD_LEFT);	
+            return $semua;
+        
+    }
